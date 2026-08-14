@@ -1,0 +1,11 @@
+const menu=document.querySelector(".menu");
+const nav=document.querySelector("nav");
+menu.addEventListener("click",()=>nav.classList.toggle("open"));
+document.querySelectorAll("nav a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));
+document.getElementById("year").textContent=new Date().getFullYear();
+const reveals=document.querySelectorAll(".skill-grid article,.gallery figure,.project-list article");
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("show");observer.unobserve(e.target)}}),{threshold:.12});
+reveals.forEach(e=>{e.style.opacity="0";e.style.transform="translateY(24px)";e.style.transition="opacity .7s ease, transform .7s ease";observer.observe(e)});
+const style=document.createElement("style");
+style.textContent=".show{opacity:1!important;transform:translateY(0)!important}";
+document.head.appendChild(style);
